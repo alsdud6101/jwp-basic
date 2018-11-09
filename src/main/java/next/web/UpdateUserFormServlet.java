@@ -22,6 +22,9 @@ public class UpdateUserFormServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User user = DataBase.findUserById(req.getParameter("userId"));
+		if(!UserSessionUtils.isSameUser(req.getSession(), user)) {
+			throw new IllegalStateException("다른 사용자의 정보를 수저할수 없습니다.");
+		}
 		req.setAttribute("user",user);
 		RequestDispatcher rd = req.getRequestDispatcher("/user/update.jsp");
 		rd.forward(req,resp);
