@@ -28,8 +28,32 @@ public class User {
     public String getEmail() {
         return email;
     }
+    
+    public void update(User updateUser) {
+    		this.password = updateUser.getPassword();
+    		this.name = updateUser.getName();
+    		this.email = updateUser.getEmail();
+    }
+    
+    public boolean isSameUser(User user) {
+    		return userId.equals(user.getUserId());
+    }
+    
+    public boolean matchPassword(String password) {
+    		if(password==null)
+    			return false;
+    		return this.password.equals(password);
+    }
+    
+    
 
     @Override
+	public String toString() {
+		
+		return "User [userId=" + userId + ",name="+name+"nemail="+email+"]";
+	}
+
+	@Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
